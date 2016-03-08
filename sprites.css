@@ -1,0 +1,82 @@
+.sprite {
+	background-image: url('sprites.png');
+	background-repeat: no-repeat;
+}
+
+.sprite.bird {
+	width: 34px;
+	height: 24px;
+	background-position:-174px -982px;
+	background-position:-230px -658px;
+	background-position:-230px -710px;
+}
+
+.sprite .pipe-top{
+    width: 52px;
+	height: 150px;
+	background-position: -112px -966px;
+}
+
+.sprite .pipe-bottom{
+    width: 52px;
+	height: 200px;
+	background-position: -168px -646px;
+}
+
+.sprite.number{
+	width: 28px;
+	height: 36px;
+}
+
+.sprite.number.dig0{
+    background-position: -990px -120px;
+}
+
+.sprite.number.dig1{
+	width: 20px;
+	background-position: -270px -910px;
+}
+
+.sprite.number.dig2{
+    background-position: -582px -320px;
+}
+
+.sprite.number.dig3{
+    background-position: -610px -320px;
+}
+
+.sprite.number.dig4{
+    background-position: -638px -320px;
+}
+
+.sprite.number.dig5{
+    background-position: -666px -320px;
+}
+
+.sprite.number.dig6{
+    background-position: -582px -368px;
+}
+
+.sprite.number.dig7{
+    background-position: -610px -368px;
+}
+
+.sprite.number.dig8{
+    background-position: -638px -368px;
+}
+
+.sprite.number.dig9{
+    background-position: -666px -368px;
+}
+
+.sprite.play-button{
+    background-position: -708px -236px;
+	width: 108px; /* 4px drop shadow */
+	height: 62px; /* 4px drop shadow */
+}
+
+.sprite.logo{
+    background-position: -701px -182px;
+	width: 179px;
+	height: 48px;
+}
