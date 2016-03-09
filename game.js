@@ -19,7 +19,7 @@ function GameRunner(_context){
 
     self.start = function() {
     	var width = context.getViewPort().width();
-    	var pipeCount = width / pipeSpacing;	// I ingore the pipe width
+    	var pipeCount = 2 * width / pipeSpacing;	// I make more in case the browser is resized
     	for(var i = 0; i < pipeCount; ++i) {
     		addPipes(width + i * pipeSpacing);
 		}
