@@ -26,11 +26,37 @@ function GameRunner(_context){
     	}
 
     	gameLoop(elapsedTime);
+
+
+    	addPipes(100, 500);
     	// console.log("animate", elapsedTime);
 	}
 
+	var distance = 0;
+	// var Pipe = 0;
+	var pipes = [];
+
 	function gameLoop(elapsedTime) {
-		background.moveLeft(elapsedTime);
+		
+		distance += elapsedTime;
+
+		//
+	}
+
+
+	function addPipes(posX, holeY) {
+		var bottom = new Sprite(context, null, "pipe-bottom", {x: posX, y: holeY});
+		bottom.setVisible(true);
+
+
+
+		var top = new Sprite(context, null, "pipe-top");
+		var topPos = {
+			x: posX,
+			y: holeY - 12 - top.getSize().y,
+		}
+		top.setPosition(topPos);
+		top.setVisible(true);
 	}
 
 	construct();

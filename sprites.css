@@ -39,14 +39,14 @@
 
 .sprite.floor{
 	background-position: -584px 0;
-	width: 336px;
+	width: 335px;
 	height: 112px;
 }
 
 .sprite.pipe-top{
     width: 52px;
 	height: 150px;
-	background-position: -112px -966px;
+	background-position: -112px -646px;
 }
 
 .sprite.pipe-bottom{
