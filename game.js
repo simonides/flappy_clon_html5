@@ -9,7 +9,7 @@ function GameRunner(_context){
     function construct() {
     	background = new Background(context);
         background.setVisible(true);
-        context.setObject("background", background);
+        context.addObject("background", background);
     }
 
 
@@ -25,7 +25,8 @@ function GameRunner(_context){
     		return;
     	}
 
-    	console.log("animate", elapsedTime);
+    	gameLoop(elapsedTime);
+    	// console.log("animate", elapsedTime);
 	}
 
 	function gameLoop(elapsedTime) {
