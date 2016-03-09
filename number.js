@@ -1,0 +1,41 @@
+function Number(_context, _$parent, position){
+    "use strict";
+    var self = new Container(_context, _$parent, position);
+    var context = _context;
+    var $elem;
+    var digits = [];
+    var size = {x: 0, y: 0};
+    
+    function construct() {
+        $elem = self.getElement();
+        self.set(0);
+    }
+
+    self.set = function(value) {
+        var stringValue = "" + value;
+        var centerPos = self.getCenterPosition();
+
+        for(var i=0; i<digits.length; ++i) {
+            digits[i].destroy();
+        }
+
+        digits = [];
+        size = {x: 0, y: 0};
+
+        for(var c=0; c<stringValue.length; ++c){
+            var digitSprite = new Sprite(context, $elem, "number dig" + stringValue[c], size);
+            digitSprite.setVisible(true);
+            digits.push(digitSprite);
+            size.x += digitSprite.getSize().x;
+        }
+
+        self.setCenterPosition(centerPos);
+    };
+
+    self.getSize = function() {
+        return size;
+    };
+
+    construct();
+    return self;
+}
