@@ -1,21 +1,6 @@
 "use strict";
 document.addEventListener('DOMContentLoaded',  init, false);
 
-function Context() {
-    "use strict";
-    var self = this;
-    var $viewport = $("#viewport");
-
-    self.getViewPort = function() {
-        return $viewport;
-    }
-
-     self.getMain = function() {
-        return $viewport;
-    }
-}
-
-
 
 function init() {
     var context = new Context();
@@ -31,6 +16,8 @@ function init() {
     number.setVisible(true);
     number.set(0);
 
+    var gameRunner = new GameRunner();
+    gameRunner.start();
 
     window.c = context;
     window.s = sprite;
