@@ -19,7 +19,7 @@ function init() {
     number.setVisible(true);
     number.set(0);
 
-    var gameRunner = new GameRunner();
+    var gameRunner = new GameRunner(context);
     gameRunner.start();
 
     window.c = context;

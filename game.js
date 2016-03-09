@@ -4,7 +4,12 @@ function GameRunner(_context){
     var context = _context;
     var lastTimestamp = 0;
 
+    var background;
+
     function construct() {
+    	background = new Background(context);
+        background.setVisible(true);
+        context.setObject("background", background);
     }
 
 
@@ -24,7 +29,8 @@ function GameRunner(_context){
 	}
 
 	function gameLoop(elapsedTime) {
-	} 
+		background.moveLeft(elapsedTime);
+	}
 
 	construct();
 }
