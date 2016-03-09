@@ -8,3 +8,8 @@
 	top: 0;
 	left: 0;
 }
+
+.sprite.floor{
+    z-index: 10;
+}
+

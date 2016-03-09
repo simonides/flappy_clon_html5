@@ -45,13 +45,13 @@
 
 .sprite.pipe-top{
     width: 52px;
-	height: 150px;
+	height: 320px;
 	background-position: -112px -646px;
 }
 
 .sprite.pipe-bottom{
     width: 52px;
-	height: 200px;
+	height: 320px;
 	background-position: -168px -646px;
 }
 
