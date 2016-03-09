@@ -46,9 +46,9 @@ function Background(_context){
         var $floorElement = floorContainer.getElement();
 
         var width = context.getViewPort().width();
-        var pos = {x: 0, y: yOffset};
+        var pos = {x: 0, y: yOffset}; 
         for(;;) {
-            var sprite = new Sprite(context, $floorElement, "floor", pos);
+            var sprite = new Sprite(context, $floorElement, "floor animatedfloor", pos);
             sprite.setVisible(true);
             floorSprites.push(sprite);
             var spriteSize = sprite.getSize();

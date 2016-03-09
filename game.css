@@ -8,3 +8,13 @@
 	top: 0;
 	left: 0;
 }
+
+.animatedfloor{
+	-webkit-animation: floorslide 200ms infinite linear; /* Chrome, Safari, Opera  */
+    animation: floorslide 200ms infinite linear;
+}
+
+@keyframes floorslide {
+   0% { background: url(sprites.png) -600px 0px; }
+   100% { background: url(sprites.png) -624px 0px; }
+}

@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded',  init, false);
 function init() {
     var context = new Context();
 
+    context.getViewPort().mousedown(
+        function(){
+            console.log("hallo");
+        }
+    );
 
     var background = new Background(context, null);
         background.setVisible(true);
@@ -13,6 +18,7 @@ function init() {
 
     var sprite = new Sprite(context, null, "bird", {x: 45, y: 80});
     sprite.setVisible(true);
+
 
 
     var number = new Number(context, null, {x: 200, y: 10});

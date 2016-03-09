@@ -3,6 +3,7 @@ function Sprite(_context, _$parent, spriteClass, position) {
     var self = new Container(_context, _$parent, position);
     var context = _context;
     var $elem;
+    var flying = false;
 
     function construct() {
         $elem = self.getElement();
