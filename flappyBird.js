@@ -6,8 +6,11 @@ function Context() {
     var self = this;
     var $viewport = $("#viewport");
 
-
     self.getViewPort = function() {
+        return $viewport;
+    }
+
+     self.getMain = function() {
         return $viewport;
     }
 }
@@ -16,6 +19,13 @@ function Context() {
 
 function init() {
     var context = new Context();
+
+
+    var background = new Background(context, null);
+        background.setVisible(true);
+
+
+
     var sprite = new Sprite(context, null, "number dig5", {x: 45, y: 80});
     var number = new Number(context, null, {x: 200, y: 10});
     number.setVisible(true);
