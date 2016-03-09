@@ -35,6 +35,7 @@ function init() {
     window.c = context;
     window.s = sprite;
     window.n = number;
+    window.b = background;
 
     setTimeout(function() {
         console.log("showing now..");
@@ -42,11 +43,12 @@ function init() {
     }, 1000);
 
 
-    var counter = 0;
-    window.setInterval(function() {
-        ++counter;
-        n.set(counter)
-    }, 10);
+    // var counter = 0;
+    // window.setInterval(function() {
+    //     ++counter;
+    //     n.set(counter)
+    //     background.moveLeft(1);
+    // }, 10);
 
 
     var sprite = new Sprite(context, null, "number dig5", {x: 0, y: 0});

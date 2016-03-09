@@ -5,7 +5,6 @@ function Sprite(_context, _$parent, spriteClass, position) {
     var $elem;
 
     function construct() {
-        
         $elem = self.getElement();
         self.setSprite(spriteClass);
     }

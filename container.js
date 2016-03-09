@@ -36,16 +36,24 @@ function Container(_context, _$parent, position){
         $elem.css({top: pos.y, left: pos.x});
     };
 
-    self.setCenterPosition = function(pos) {
-        pos.x -= (self.getSize().x) / 2;
-        self.setPosition(pos);
-    };
-
     self.getPosition = function() {
         return {
             x: parseInt($elem.css('left'), 10),
             y: parseInt($elem.css('top'), 10)
         };
+    };
+
+    self.translate = function(vec) {
+        var pos = self.getPosition();
+        pos.x += vec.x;
+        pos.y += vec.y;
+        self.setPosition(pos);
+        return pos;
+    }
+
+    self.setCenterPosition = function(pos) {
+        pos.x -= (self.getSize().x) / 2;
+        self.setPosition(pos);
     };
 
     self.getCenterPosition = function() {

@@ -11,9 +11,19 @@
 	background-position:-230px -710px;
 }
 
-.sprite.background1{
+.sprite.background1, .sprite.background2{
 	width: 288px;
 	height: 511px;
+}
+
+.sprite.background2{
+	background-position: -292px 0;
+}
+
+.sprite.floor{
+	background-position: -584px 0;
+	width: 336px;
+	height: 112px;
 }
 
 .sprite.pipe-top{

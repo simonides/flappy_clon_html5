@@ -1,3 +1,7 @@
+#viewport{
+	overflow: hidden;
+}
+
 #viewport div{
 	display: none;
 	position: absolute;
