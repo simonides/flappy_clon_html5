@@ -7,8 +7,25 @@
 	width: 34px;
 	height: 24px;
 	background-position:-174px -982px;
-	background-position:-230px -658px;
-	background-position:-230px -710px;
+	/*background-position:-230px -658px;*/
+	/*background-position:-230px -710px;*/
+	position :relative;
+	-webkit-animation: bird_flap 0.2s step-end infinite; /* Chrome, Safari, Opera  */
+    animation: bird_flap 0.2s step-end infinite;
+}
+
+/* Chrome, Safari, Opera */ 
+@-webkit-keyframes bird_flap {
+    0%   {background-position:-174px -982px;}
+    33%  {background-position:-230px -658px;}
+    66%  {background-position:-230px -710px;}
+}
+
+/* Standard syntax */
+@keyframes bird_flap {
+    0%   {background-position:-174px -982px;}
+    33%  {background-position:-230px -658px;}
+    66%  {background-position:-230px -710px;}
 }
 
 .sprite.background1, .sprite.background2{
