@@ -11,7 +11,10 @@ function init() {
 
 
 
-    var sprite = new Sprite(context, null, "number dig5", {x: 45, y: 80});
+    var sprite = new Sprite(context, null, "bird", {x: 45, y: 80});
+    sprite.setVisible(true);
+
+
     var number = new Number(context, null, {x: 200, y: 10});
     number.setVisible(true);
     number.set(0);
