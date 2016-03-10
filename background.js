@@ -34,7 +34,7 @@ function Background(_context){
             backgroundSprites.push(sprite);
             var spriteSize = sprite.getSize();
             pos.x += spriteSize.x;
-            if(pos.x >= width + spriteSize.x) {
+            if(pos.x >= 2 * width + spriteSize.x) { // make more if browser is resized
                 return spriteSize.y;
             }
         }
@@ -53,7 +53,7 @@ function Background(_context){
             floorSprites.push(sprite);
             var spriteSize = sprite.getSize();
             pos.x += spriteSize.x;
-            if(pos.x >= width + spriteSize.x) {
+            if(pos.x >= 2* width + spriteSize.x) { // make more if browser is resized
                 break;
             }
         }

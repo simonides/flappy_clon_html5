@@ -6,6 +6,7 @@ function init() {
     var context = new Context();
 
     context.getViewPort().mousedown(
+        
         function(){
             console.log("hallo");
         }
