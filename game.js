@@ -47,7 +47,7 @@ function GameRunner(_context){
 
 	function gameLoop(elapsedTime) {
 		
-		movePipes(elapsedTime/2);
+		movePipes(elapsedTime/12);
 		//
 	}
 
