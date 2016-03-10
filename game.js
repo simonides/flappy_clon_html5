@@ -13,7 +13,6 @@ function GameRunner(_context){
     function construct() {
     	background = new Background(context);
         background.setVisible(true);
-        context.addObject("background", background);
     }
 
 
