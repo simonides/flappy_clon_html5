@@ -11,6 +11,7 @@ function GameRunner(_context){
     var background;
     var bird;
     var verticalBirdSpeed = 0;
+    var deathHeight;
 
     function construct() {
     	background = new Background(context);
@@ -23,6 +24,8 @@ function GameRunner(_context){
 
         bird = new Sprite(context, null, "bird", birdPosition);
     	bird.setVisible(true);
+
+    	deathHeight = background.getFloorHeight() - bird.getSize().y;
     }
 
 
@@ -50,9 +53,11 @@ function GameRunner(_context){
 	}
 
 
-	function onMouseDown(){
-		console.log("flap!");
+	function onMouseDown(event){
+		console.log("flap!", arguments);
 		verticalBirdSpeed = -10;
+		// For debugging purposes: set bird position to mouse
+		// bird.setPosition({x: event.clientX, y: event.clientY});
 	}
 
 
@@ -60,7 +65,28 @@ function GameRunner(_context){
 		movePipes(elapsedTime/12);
 		verticalBirdSpeed -= elapsedTime * 0.05;
 		bird.translate({x: 0, y: verticalBirdSpeed});
-		//
+		if(doesBirdCollide()) {
+			console.log("!");
+		}
+	}
+
+
+
+	function doesBirdCollide() {
+		var birdPos = bird.getPosition();
+		if(birdPos.y > deathHeight) {
+			return true;
+		}
+		for(var i=0; i<pipes.length; ++i) {
+			var pipeX = pipes[i][0].getPosition().x;
+			if(birdPos.x < pipeX) {
+				continue;
+			}
+			if(pipes[i][0].collidesWith(bird) || pipes[i][1].collidesWith(bird)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 

@@ -8,13 +8,14 @@ function Background(_context){
     var floorContainer;
     var backgroundSprites = [];
     var floorSprites = [];
+    var floorHeight;
     
     function construct() {
         $elem = self.getElement();
 
 
-        var sizeY = constructBackground()
-        constructFloor(sizeY)
+        floorHeight = constructBackground()
+        constructFloor()
 
         delete self.getSize;
     };
@@ -40,13 +41,13 @@ function Background(_context){
         }
     }
 
-    function constructFloor(yOffset) {
+    function constructFloor() {
         floorContainer = new Container(context, $elem, {x: 0, y: 0});
         floorContainer.setVisible(true);
         var $floorElement = floorContainer.getElement();
 
         var width = context.getViewPort().width();
-        var pos = {x: 0, y: yOffset}; 
+        var pos = {x: 0, y: floorHeight}; 
         for(;;) {
             var sprite = new Sprite(context, $floorElement, "floor animatedfloor", pos);
             sprite.setVisible(true);
@@ -59,6 +60,10 @@ function Background(_context){
         }
     }
 
+    self.getFloorHeight = function() {
+        return floorHeight;
+    }
+    
     self.moveLeft = function(width){
         moveSpritesLeft(backgroundSprites, width * 0.1);
     }
