@@ -8,6 +8,8 @@ function GameRunner(_context){
 	var pipeSpacing = 250;
 	var pipes = [];
 
+	var isGameOver;
+
     var background;
     var bird;
     var verticalBirdSpeed = 0;
@@ -38,10 +40,14 @@ function GameRunner(_context){
 
 		context.getViewPort().mousedown(onMouseDown);
 
+		isGameOver = false;
     	scheduler();
     }
 
     function scheduler(timestamp) {
+    	if(isGameOver) {
+    		return;
+    	}
     	var elapsedTime = lastTimestamp - timestamp;
     	lastTimestamp = timestamp;
 	    requestAnimationFrame(scheduler);
@@ -64,9 +70,14 @@ function GameRunner(_context){
 	function gameLoop(elapsedTime) {		
 		movePipes(elapsedTime/12);
 		verticalBirdSpeed -= elapsedTime * 0.05;
+		if(verticalBirdSpeed < -20) {	// clamp
+			verticalBirdSpeed = -20;
+		}
+
 		bird.translate({x: 0, y: verticalBirdSpeed});
 		if(doesBirdCollide()) {
 			console.log("!");
+			isGameOver = true;
 		}
 	}
 
