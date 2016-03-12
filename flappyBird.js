@@ -1,27 +1,24 @@
 "use strict";
+
+jQuery.fn.rotate = function(degrees) {
+    $(this).css({'-webkit-transform' : 'rotate('+ degrees +'deg)',
+                 '-moz-transform' : 'rotate('+ degrees +'deg)',
+                 '-ms-transform' : 'rotate('+ degrees +'deg)',
+                 'transform' : 'rotate('+ degrees +'deg)'});
+    return $(this);
+};
+
+
 document.addEventListener('DOMContentLoaded',  init, false);
 
 
 function init() {
     var context = new Context();
 
-    
-
-
-	var scorePosition = {
-    	x: context.getViewPort().width() / 2,
-    	y: 10
-    };
-
-    var number = new Number(context, null, scorePosition);
-    number.setVisible(true);
-    number.set(0);
+        
 
     var gameRunner = new GameRunner(context);
     gameRunner.start();
-
-    window.c = context;
-    window.n = number;
 
       
 }

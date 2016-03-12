@@ -1,6 +1,7 @@
 #viewport{
 	overflow: hidden;
 	height: 623px;
+	cursor: pointer;
 }
 
 #viewport div{
@@ -26,4 +27,8 @@
 
 .sprite.floor{
     z-index: 10;
+}
+
+.ui{
+	z-index: 15;
 }
