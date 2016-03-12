@@ -3,7 +3,7 @@ function Context() {
     var self = this;
     var $viewport = $("#viewport");
 
-    var objectStore = {};
+    // var objectStore = {};
 
     self.getViewPort = function() {
         return $viewport;
@@ -13,12 +13,12 @@ function Context() {
         return $viewport;
     }
 
-    self.addObject = function(name, object) {
-        objectStore[name] = object;
-    }
+    // self.addObject = function(name, object) {
+    //     objectStore[name] = object;
+    // }
 
-    self.getObject = function(name, object) {
-        return objectStore[name] || null;
-    }
+    // self.getObject = function(name, object) {
+    //     return objectStore[name] || null;
+    // }
 }
 
