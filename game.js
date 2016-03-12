@@ -61,6 +61,8 @@ function GameRunner(_context){
 		var spliceCount = 0;
 		for(var i=0; i<pipes.length; ++i) {
 			pipes[i][0].translate({x: distance, y: 0});
+			console.log("distance: " + distance);
+			console.log("pipew: " + pipeWidth);
 			var newPos = pipes[i][1].translate({x: distance, y: 0});
 			if(newPos.x < -pipeWidth){
 				++spliceCount;
