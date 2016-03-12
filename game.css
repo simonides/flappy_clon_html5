@@ -25,6 +25,10 @@
     z-index: -1;
 }
 
+.sprite.bird{
+    z-index: 12;
+}
+
 .sprite.floor{
     z-index: 10;
 }
