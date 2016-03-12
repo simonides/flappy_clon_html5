@@ -61,7 +61,6 @@ function Background(_context){
 
     self.moveLeft = function(width){
         moveSpritesLeft(backgroundSprites, width * 0.1);
-        moveSpritesLeft(floorSprites, width);
     }
 
     function moveSpritesLeft(spriteArray, width) {

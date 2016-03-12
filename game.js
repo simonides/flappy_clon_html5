@@ -4,15 +4,25 @@ function GameRunner(_context){
     var context = _context;
     var lastTimestamp = 0;
 
-    var background;
 	var holeHeight = 100;
 	var pipeSpacing = 250;
 	var pipes = [];
 
+    var background;
+    var bird;
+    var verticalBirdSpeed = 0;
 
     function construct() {
     	background = new Background(context);
         background.setVisible(true);
+    
+    	var birdPosition = {
+    		x: context.getViewPort().width() / 2,
+    		y: context.getViewPort().height() / 2
+    	};
+
+        bird = new Sprite(context, null, "bird", birdPosition);
+    	bird.setVisible(true);
     }
 
 
@@ -22,6 +32,8 @@ function GameRunner(_context){
     	for(var i = 0; i < pipeCount; ++i) {
     		addPipes(width + i * pipeSpacing);
 		}
+
+		context.getViewPort().mousedown(onMouseDown);
 
     	scheduler();
     }
@@ -35,19 +47,19 @@ function GameRunner(_context){
     	}
 
     	gameLoop(elapsedTime);
-
-
-    	// console.log("animate", elapsedTime);
 	}
 
 
+	function onMouseDown(){
+		console.log("flap!");
+		verticalBirdSpeed = -10;
+	}
 
 
-
-
-	function gameLoop(elapsedTime) {
-		
+	function gameLoop(elapsedTime) {		
 		movePipes(elapsedTime/12);
+		verticalBirdSpeed -= elapsedTime * 0.05;
+		bird.translate({x: 0, y: verticalBirdSpeed});
 		//
 	}
 
@@ -60,8 +72,6 @@ function GameRunner(_context){
 		var spliceCount = 0;
 		for(var i=0; i<pipes.length; ++i) {
 			pipes[i][0].translate({x: distance, y: 0});
-			console.log("distance: " + distance);
-			console.log("pipew: " + pipeWidth);
 			var newPos = pipes[i][1].translate({x: distance, y: 0});
 			if(newPos.x < -pipeWidth){
 				++spliceCount;
