@@ -87,7 +87,6 @@ function GameRunner(_context){
 
 
     function toggleEndScreen(isVisible){
-
         how_to_play.setVisible(isVisible);
         play_btn.setVisible(isVisible);
         game_over.setVisible(isVisible);
@@ -106,7 +105,6 @@ function GameRunner(_context){
         
         isGameOver = false;
         isGameStopped = false;
-        
     }
 
     function scheduler(timestamp) {
@@ -118,17 +116,6 @@ function GameRunner(_context){
             return;
         }
         gameLoop(elapsedTime);
-    }
-
-    function flashOnce () {
-        // console.log("flash me");
-        flash_div.addClass('flash');
-      
-        flash_div.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',   
-        function(e) {
-            // console.log("flash ended");
-            flash_div.removeClass('flash');
-        });
     }
 
     function onMouseDown(event){
@@ -161,6 +148,9 @@ function GameRunner(_context){
                 background.toggleFloorAnimation(false);
                 bird.setSprite("bird");
             }
+            if(bird.getPosition().y< 500){
+                moveBurt(elapsedTime*-1);
+            }
             return;
         }        
         if(isBurtFlapping){
@@ -180,7 +170,19 @@ function GameRunner(_context){
         return num >= 0 ? 1 : -1;
     }
 
+    function flashOnce () {
+    // console.log("flash me");
+        flash_div.addClass('flash');
+        flash_div.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',   
+        function(e) {
+            // console.log("flash ended");
+            flash_div.removeClass('flash');
+        });
+    }
+
+
     function moveBurt(elapsedTime){
+        console.log( bird.getPosition().y);
         verticalBirdSpeed -= elapsedTime * 0.03;
         if(verticalBirdSpeed < -20) {   // clamp
             verticalBirdSpeed = -20;
