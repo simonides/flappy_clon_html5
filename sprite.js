@@ -45,13 +45,13 @@ function Sprite(_context, _$parent, spriteClass, position) {
     self.isInside = function(pos) {
         var me = self.getPosition();
         var size = self.getSize();
-        if(pos.x < me.x || pos.x > me.x + size.x) {
-            return false;
+       
+        if(pos.x >= me.x && pos.x <= me.x + size.x) {
+            if(pos.y >= me.y && pos.y <= me.y + size.y) {
+                return true;
+            }
         }
-        if(pos.y < me.y || pos.y > me.y + size.y) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
     construct();

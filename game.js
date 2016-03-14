@@ -205,7 +205,7 @@ function GameRunner(_context){
         }
         for(var i=0; i<pipes.length; ++i) {
             var pipeX = pipes[i][0].getPosition().x;
-            if(birdPos.x < pipeX) {
+            if(birdPos.x + 50 < pipeX) {    // 50 =~bird width
                 continue;
             }
             if(pipes[i][0].collidesWith(bird) || pipes[i][1].collidesWith(bird)) {
