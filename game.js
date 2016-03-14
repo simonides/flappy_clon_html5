@@ -9,6 +9,7 @@ function GameRunner(_context){
     var pipes = [];
 
     var isGameOver;
+    var isGameStopped = false;
 
     var background;
     var bird;
@@ -17,9 +18,16 @@ function GameRunner(_context){
     var deathHeight;
     var birdX;
     var isBurtFlapping = false; // used to clear the animation of the bird
+    var burtAnimationTimeCounter = 0;
     var isFloorMoving = false; 
-    
+
+    var isSchedulerRunning = false;
+
     function construct() {
+        createGame();
+    }
+
+    function createGame(){
         background = new Background(context);
         background.setVisible(true);
     
@@ -42,7 +50,6 @@ function GameRunner(_context){
         deathHeight = background.getFloorHeight() - bird.getSize().y;
     }
 
-
     self.start = function() {
         var width = context.getViewPort().width();
         var pipeCount = 2 * width / pipeSpacing;    // I make more in case the browser is resized
@@ -53,15 +60,34 @@ function GameRunner(_context){
         context.getViewPort().mousedown(onMouseDown);
 
         isGameOver = false;
-        scheduler();
+        isGameStopped = false;
+        if(!isSchedulerRunning){
+            isSchedulerRunning = true;
+            scheduler();
+        }
+    }
+
+
+    function displayEndScreen(){
+
+        console.log("display menu");
+        var menu = new Sprite(context, null, "sprite play_btn");
+        // menu.setVisible(true);
+    }
+
+    function restartGame(){
+        counter = 0;
+        $("#viewport").empty();
+        createGame();
+        self.start();
+        isGameOver = false;
+        isGameStopped = false;
     }
 
     function scheduler(timestamp) {
-        if(isGameOver) {
-            return;
-        }
-        var elapsedTime = lastTimestamp - timestamp;
+        var elapsedTime = timestamp - lastTimestamp;
         lastTimestamp = timestamp;
+        
         requestAnimationFrame(scheduler);
         if(elapsedTime > 100 || elapsedTime === 0 || isNaN(elapsedTime)) {
             return;
@@ -70,33 +96,59 @@ function GameRunner(_context){
         gameLoop(elapsedTime);
     }
 
-var booleant = false    ;
+    
+var counter = 0;
     function onMouseDown(event){
-        booleant = !booleant;
-
         console.log("flap!");
-        
-        background.toggleFloorAnimation(booleant);
-        if(booleant){
+++counter;
+if(counter >= 7 ){
+    restartGame();
+}
+        isBurtFlapping = true;
+        burtAnimationTimeCounter = 0;
+        bird.setSprite("bird bird_anim");
 
-            bird.setSprite("bird bird_anim");
-        }else{
-            bird.setSprite("bird");
-        }
-        // verticalBirdSpeed = -10;
+// displayEndScreen();
+
+
+        verticalBirdSpeed = -10;
 
         // For debugging purposes: set bird position to mouse
-        bird.setPosition({x: event.clientX, y: event.clientY});
+        // bird.setPosition({x: event.clientX, y: event.clientY});
     }
 
 
-    function gameLoop(elapsedTime) {        
-        movePipes(elapsedTime/12);
-        // verticalBirdSpeed -= elapsedTime * 0.03;
-        // if(verticalBirdSpeed < -20) {   // clamp
-        //     verticalBirdSpeed = -20;
-        // }
+    function gameLoop(elapsedTime) {
+        if(isGameOver){
+            if(!isGameStopped){
+                isGameStopped = true;
+                background.toggleFloorAnimation(false);
+                bird.setSprite("bird");
+            }
+            return;
+        }        
+        if(isBurtFlapping){
+            burtAnimationTimeCounter += elapsedTime;
+            if(burtAnimationTimeCounter >= 350){
+                burtAnimationTimeCounter = 0;
+                isBurtFlapping = false;
+                bird.setSprite("bird");
+            }
+        }
+        movePipes(elapsedTime/12 * -1);
+        moveBurt(elapsedTime*-1);
+        
+    }
 
+    function sign(num) {
+        return num >= 0 ? 1 : -1;
+    }
+
+    function moveBurt(elapsedTime){
+        verticalBirdSpeed -= elapsedTime * 0.03;
+        if(verticalBirdSpeed < -20) {   // clamp
+            verticalBirdSpeed = -20;
+        }
         bird.translate({x: 0, y: verticalBirdSpeed});
         var rotation = verticalBirdSpeed * verticalBirdSpeed * 0.2;
         if(rotation > 90) {
@@ -108,11 +160,6 @@ var booleant = false    ;
             isGameOver = true;
         }
     }
-
-    function sign(num) {
-        return num >= 0 ? 1 : -1;
-    }
-
 
     function doesBirdCollide() {
         var birdPos = bird.getPosition();
