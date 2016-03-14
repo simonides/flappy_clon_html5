@@ -49,7 +49,8 @@ function Background(_context){
         var width = context.getViewPort().width();
         var pos = {x: 0, y: floorHeight}; 
         for(;;) {
-            var sprite = new Sprite(context, $floorElement, "floor animatedfloor", pos);
+            var sprite = new Sprite(context, $floorElement, "floor", pos);
+            // var sprite = new Sprite(context, $floorElement, "floor animatedfloor", pos);
             sprite.setVisible(true);
             floorSprites.push(sprite);
             var spriteSize = sprite.getSize();
@@ -57,6 +58,16 @@ function Background(_context){
             if(pos.x >= 2* width + spriteSize.x) { // make more if browser is resized
                 break;
             }
+        }
+    }
+
+    self.toggleFloorAnimation = function(animateFloor){
+        
+        console.log("omg " +floorSprites.length);
+
+        var classes = animateFloor ? "floor animatedfloor" : "floor";
+        for(var i = 0; i < floorSprites.length; ++i){
+            floorSprites[i].setSprite(classes);
         }
     }
 

@@ -7,9 +7,9 @@
 	width: 34px;
 	height: 24px;
 	background-position:-174px -982px;
-	/*background-position:-230px -658px;*/
-	/*background-position:-230px -710px;*/
 	position :relative;
+}
+.bird_anim{
 	-webkit-animation: bird_flap 0.2s step-end infinite; /* Chrome, Safari, Opera  */
     animation: bird_flap 0.2s step-end infinite;
 }

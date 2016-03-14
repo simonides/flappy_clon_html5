@@ -16,7 +16,9 @@ function GameRunner(_context){
     var verticalBirdSpeed = 0;
     var deathHeight;
     var birdX;
-
+    var isBurtFlapping = false; // used to clear the animation of the bird
+    var isFloorMoving = false; 
+    
     function construct() {
         background = new Background(context);
         background.setVisible(true);
@@ -68,21 +70,32 @@ function GameRunner(_context){
         gameLoop(elapsedTime);
     }
 
-
+var booleant = false    ;
     function onMouseDown(event){
+        booleant = !booleant;
+
         console.log("flap!");
-        verticalBirdSpeed = -10;
+        
+        background.toggleFloorAnimation(booleant);
+        if(booleant){
+
+            bird.setSprite("bird bird_anim");
+        }else{
+            bird.setSprite("bird");
+        }
+        // verticalBirdSpeed = -10;
+
         // For debugging purposes: set bird position to mouse
-        // bird.setPosition({x: event.clientX, y: event.clientY});
+        bird.setPosition({x: event.clientX, y: event.clientY});
     }
 
 
     function gameLoop(elapsedTime) {        
         movePipes(elapsedTime/12);
-        verticalBirdSpeed -= elapsedTime * 0.03;
-        if(verticalBirdSpeed < -20) {   // clamp
-            verticalBirdSpeed = -20;
-        }
+        // verticalBirdSpeed -= elapsedTime * 0.03;
+        // if(verticalBirdSpeed < -20) {   // clamp
+        //     verticalBirdSpeed = -20;
+        // }
 
         bird.translate({x: 0, y: verticalBirdSpeed});
         var rotation = verticalBirdSpeed * verticalBirdSpeed * 0.2;
