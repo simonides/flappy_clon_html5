@@ -23,6 +23,11 @@ function GameRunner(_context){
 
     var isSchedulerRunning = false;
 
+    //init variables to use for restarting the game
+    var birdStartPosition;
+    var window_width;
+    var pipeCount;
+
     function construct() {
         createGame();
     }
@@ -31,11 +36,11 @@ function GameRunner(_context){
         background = new Background(context);
         background.setVisible(true);
     
-        var birdPosition = {
+        birdStartPosition = {
             x: context.getViewPort().width() / 2,
             y: context.getViewPort().height() / 2
         };
-        bird = new Sprite(context, null, "bird", birdPosition);
+        bird = new Sprite(context, null, "bird", birdStartPosition);
         bird.setVisible(true);
         birdX = bird.getPosition().x;
 
@@ -51,11 +56,9 @@ function GameRunner(_context){
     }
 
     self.start = function() {
-        var width = context.getViewPort().width();
-        var pipeCount = 2 * width / pipeSpacing;    // I make more in case the browser is resized
-        for(var i = 0; i < pipeCount; ++i) {
-            addPipes(width + i * pipeSpacing);
-        }
+        window_width = context.getViewPort().width();
+        pipeCount = 2 * window_width / pipeSpacing;    // I make more in case the browser is resized
+        createPipes();
 
         context.getViewPort().mousedown(onMouseDown);
 
@@ -68,6 +71,7 @@ function GameRunner(_context){
     }
 
 
+
     function displayEndScreen(){
 
         console.log("display menu");
@@ -76,12 +80,17 @@ function GameRunner(_context){
     }
 
     function restartGame(){
-        counter = 0;
-        $("#viewport").empty();
-        createGame();
-        self.start();
+        
+        score.set(0);
+
+        bird.setPosition(birdStartPosition);        
+        removePipes();
+        createPipes();
+        background.toggleFloorAnimation(true);
+        
         isGameOver = false;
         isGameStopped = false;
+        
     }
 
     function scheduler(timestamp) {
@@ -97,19 +106,14 @@ function GameRunner(_context){
     }
 
     
-var counter = 0;
     function onMouseDown(event){
-        console.log("flap!");
-++counter;
-if(counter >= 7 ){
-    restartGame();
-}
+
+    if(event.which == 2){ // middle click
+        restartGame();
+    }
         isBurtFlapping = true;
         burtAnimationTimeCounter = 0;
         bird.setSprite("bird bird_anim");
-
-// displayEndScreen();
-
 
         verticalBirdSpeed = -10;
 
@@ -209,6 +213,13 @@ if(counter >= 7 ){
         }
     }
 
+
+    function createPipes(){
+        for(var i = 0; i < pipeCount; ++i) {
+            addPipes(window_width + i * pipeSpacing);
+        }
+    }
+
     function addPipes(posX) {
         var holeY = getRandomHolePosition();
         var bottom = new Sprite(context, null, "pipe-bottom", {x: posX, y: holeY});
@@ -221,6 +232,15 @@ if(counter >= 7 ){
         bottom.setVisible(true);
         top.setVisible(true);
         pipes.push([top, bottom]);
+    }
+
+    function removePipes(){
+        for(var i = 0; i < pipes.length; ++i) {
+            pipes[i][0].destroy();
+            pipes[i][1].destroy();
+        }
+        pipes.length = 0;
+        console.log("length" + pipes.length);
     }
 
     function getRandomHolePosition() {
