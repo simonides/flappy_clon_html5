@@ -31,6 +31,11 @@ function GameRunner(_context){
     // flash when bird crashes
     var flash_div = $('#flash_div');
 
+    var play_btn;
+    var how_to_play;
+    var game_over;
+    var game_name;
+
     function construct() {
         createGame();
     }
@@ -56,6 +61,13 @@ function GameRunner(_context){
         score.set(0);
 
         deathHeight = background.getFloorHeight() - bird.getSize().y;
+        
+        play_btn = new Sprite(context, null, "sprite play_btn menu");
+        $('.play_btn').click(restartGame);
+
+        how_to_play = new Sprite(context, null, "sprite game_how_to menu");
+        game_over = new Sprite(context, null, "sprite game_over menu");
+        game_name = new Sprite(context, null, "sprite flappy_name menu");
     }
 
     self.start = function() {
@@ -74,17 +86,18 @@ function GameRunner(_context){
     }
 
 
+    function toggleEndScreen(isVisible){
 
-    function displayEndScreen(){
-
-        console.log("display menu");
-        var menu = new Sprite(context, null, "sprite play_btn");
-        // menu.setVisible(true);
+        how_to_play.setVisible(isVisible);
+        play_btn.setVisible(isVisible);
+        game_over.setVisible(isVisible);
+        game_name.setVisible(isVisible);
     }
 
     function restartGame(){
-        
+        verticalBirdSpeed = -2;
         score.set(0);
+        toggleEndScreen(false);
 
         bird.setPosition(birdStartPosition);        
         removePipes();
@@ -143,6 +156,7 @@ function GameRunner(_context){
         if(isGameOver){
             if(!isGameStopped){
                 flashOnce();
+                toggleEndScreen(true);
                 isGameStopped = true;
                 background.toggleFloorAnimation(false);
                 bird.setSprite("bird");

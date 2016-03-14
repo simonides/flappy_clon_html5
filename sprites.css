@@ -125,39 +125,38 @@
     bottom: 0;
     left: 0;
     right: 0;
-
     margin: auto;
+}
 
-
+.sprite.menu{
+	z-index: 51;
+	position: absolute;
+    top:-0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 .sprite.play_btn{
     background-position: -708px -235px;
 	width: 104px;
 	height: 59px;
-
-	z-index: 51;
-
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    margin: auto;
-
-
+    margin-top:400px;
 }
+
 .sprite.flappy_name{
     background-position: -701px -182px;
 	width: 179px;
 	height: 48px;
+    margin-top: 80px;
 }
 
 .sprite.game_over{
     background-position: -790px -116px;
 	width: 192px;
 	height: 46px;
+    margin-top: 290px;
 }
 
 .sprite.game_starting{
@@ -170,4 +169,5 @@
     background-position: -584px -182px;
 	width: 114px;
 	height: 98px;
+    margin-top: 150px;
 }
