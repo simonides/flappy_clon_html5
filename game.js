@@ -28,6 +28,9 @@ function GameRunner(_context){
     var window_width;
     var pipeCount;
 
+    // flash when bird crashes
+    var flash_div = $('#flash_div');
+
     function construct() {
         createGame();
     }
@@ -101,16 +104,30 @@ function GameRunner(_context){
         if(elapsedTime > 100 || elapsedTime === 0 || isNaN(elapsedTime)) {
             return;
         }
-
         gameLoop(elapsedTime);
     }
 
-    
+    function flashOnce () {
+        // console.log("flash me");
+        flash_div.addClass('flash');
+      
+        flash_div.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',   
+        function(e) {
+            // console.log("flash ended");
+            flash_div.removeClass('flash');
+        });
+    }
+
     function onMouseDown(event){
 
-    if(event.which == 2){ // middle click
-        restartGame();
-    }
+        if(event.which == 2){ // middle click
+            restartGame();
+        }
+        if(isGameOver){ //ignore clicks when burt is dead
+            return;
+        }
+
+
         isBurtFlapping = true;
         burtAnimationTimeCounter = 0;
         bird.setSprite("bird bird_anim");
@@ -125,6 +142,7 @@ function GameRunner(_context){
     function gameLoop(elapsedTime) {
         if(isGameOver){
             if(!isGameStopped){
+                flashOnce();
                 isGameStopped = true;
                 background.toggleFloorAnimation(false);
                 bird.setSprite("bird");
