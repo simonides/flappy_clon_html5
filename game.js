@@ -4,7 +4,7 @@ function GameRunner(_context){
     var context = _context;
     var lastTimestamp = 0;
 
-    var holeHeight = 100;
+    var holeHeight = 140;
     var pipeSpacing = 250;
     var pipes = [];
 
