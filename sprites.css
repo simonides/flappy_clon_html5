@@ -28,6 +28,26 @@
     66%  {background-position:-230px -710px;}
 }
 
+.bird_anim_trans{
+    -webkit-animation: bird_flap_trans 2.2s infinite, bird_flap 0.2s step-end infinite; /* Chrome, Safari, Opera  */
+    animation: bird_flap_trans 2.2s infinite,bird_flap 0.2s step-end infinite;
+}
+
+/* Chrome, Safari, Opera */ 
+@-webkit-keyframes bird_flap_trans {
+    0%  {top: 311.5px;}
+    50% {top: 350px;}
+}
+
+/* Standard syntax */
+@keyframes bird_flap_trans {
+    0%  {top: 311.5px;}
+    50% {top: 350px;}
+}
+
+
+
+
 .sprite.background1, .sprite.background2{
 	width: 288px;
 	height: 511px;

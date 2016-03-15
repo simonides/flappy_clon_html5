@@ -92,7 +92,7 @@ function GameRunner(_context){
             toggleEndScreen(true);
             isGameStopped = true;
             background.toggleFloorAnimation(false);
-            bird.setSprite("bird");
+            bird.setSprite("bird bird_anim bird_anim_trans");
             scheduler();
         }
     }
