@@ -28,6 +28,8 @@ function GameRunner(_context){
     var window_width;
     var pipeCount;
 
+    var lastFlap = 0;
+
     // flash when bird crashes
     var flash_div = $('#flash_div');
 
@@ -105,6 +107,7 @@ function GameRunner(_context){
         
         isGameOver = false;
         isGameStopped = false;
+        lastFlap = 0;
     }
 
     function scheduler(timestamp) {
@@ -119,7 +122,6 @@ function GameRunner(_context){
     }
 
     function onMouseDown(event){
-
         if(event.which == 2){ // middle click
             restartGame();
         }
@@ -127,6 +129,12 @@ function GameRunner(_context){
             return;
         }
 
+        var now = new Date();
+        if(now - lastFlap < 250) {	// minimum delay
+        	return;
+        }
+
+        lastFlap = now;
 
         isBurtFlapping = true;
         burtAnimationTimeCounter = 0;
