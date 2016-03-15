@@ -36,7 +36,10 @@ function GameRunner(_context){
     var play_btn;
     var how_to_play;
     var game_over;
+    var get_ready;
     var game_name;
+
+    var introScreen = true;
 
     function construct() {
         createGame();
@@ -65,11 +68,13 @@ function GameRunner(_context){
         deathHeight = background.getFloorHeight() - bird.getSize().y;
         
         play_btn = new Sprite(context, null, "sprite play_btn menu");
-        $('.play_btn').click(restartGame);
+        $('.play_btn').click(function(){restartGame(); introScreen = false;});
 
         how_to_play = new Sprite(context, null, "sprite game_how_to menu");
         game_over = new Sprite(context, null, "sprite game_over menu");
+        get_ready = new Sprite(context, null, "sprite game_starting menu");
         game_name = new Sprite(context, null, "sprite flappy_name menu");
+        get_ready.translate({x: 0, y: -250});
     }
 
     self.start = function() {
@@ -83,16 +88,25 @@ function GameRunner(_context){
         isGameStopped = false;
         if(!isSchedulerRunning){
             isSchedulerRunning = true;
+           
+            toggleEndScreen(true);
+            isGameStopped = true;
+            background.toggleFloorAnimation(false);
+            bird.setSprite("bird");
             scheduler();
         }
     }
 
 
     function toggleEndScreen(isVisible){
-        how_to_play.setVisible(isVisible);
-        play_btn.setVisible(isVisible);
-        game_over.setVisible(isVisible);
-        game_name.setVisible(isVisible);
+        if(isGameOver){
+	        how_to_play.setVisible(isVisible);
+	        play_btn.setVisible(isVisible);
+        	game_over.setVisible(isVisible);
+       		game_name.setVisible(isVisible);
+    	} else {
+    		get_ready.setVisible(isVisible);
+    	}
     }
 
     function restartGame(){
@@ -122,6 +136,10 @@ function GameRunner(_context){
     }
 
     function onMouseDown(event){
+    	if(introScreen) {
+    		restartGame(); 
+    		introScreen = false;
+    	}
         if(event.which == 2){ // middle click
             restartGame();
         }
@@ -169,9 +187,11 @@ function GameRunner(_context){
                 bird.setSprite("bird");
             }
         }
-        movePipes(elapsedTime/12 * -1);
-        moveBurt(elapsedTime*-1);
-        background.moveLeft(elapsedTime * 0.1);
+        if(!introScreen) {
+	        movePipes(elapsedTime/12 * -1);
+	        moveBurt(elapsedTime*-1);
+	        background.moveLeft(elapsedTime * 0.1);
+        }
     }
 
     function sign(num) {
@@ -190,6 +210,9 @@ function GameRunner(_context){
 
 
     function moveBurt(elapsedTime){
+    	if(introScreen) {
+    		return;
+    	}
         verticalBirdSpeed -= elapsedTime * 0.03;
         if(verticalBirdSpeed < -20) {   // clamp
             verticalBirdSpeed = -20;
