@@ -45,8 +45,8 @@ function Container(_context, _$parent, position){
 
     self.translate = function(vec) {
         var pos = self.getPosition();
-        pos.x += vec.x;
-        pos.y += vec.y;
+        pos.x = Math.floor(pos.x + vec.x);
+        pos.y = Math.floor(pos.y + vec.y);
         self.setPosition(pos);
         return pos;
     }

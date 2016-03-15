@@ -163,7 +163,7 @@ function GameRunner(_context){
         }
         movePipes(elapsedTime/12 * -1);
         moveBurt(elapsedTime*-1);
-        
+        background.moveLeft(elapsedTime * 0.1);
     }
 
     function sign(num) {
@@ -182,7 +182,6 @@ function GameRunner(_context){
 
 
     function moveBurt(elapsedTime){
-        console.log( bird.getPosition().y);
         verticalBirdSpeed -= elapsedTime * 0.03;
         if(verticalBirdSpeed < -20) {   // clamp
             verticalBirdSpeed = -20;
@@ -194,7 +193,6 @@ function GameRunner(_context){
         }
         bird.getElement().rotate(rotation * sign(verticalBirdSpeed));
         if(doesBirdCollide()) {
-            console.log("!");
             isGameOver = true;
         }
     }
@@ -274,7 +272,6 @@ function GameRunner(_context){
             pipes[i][1].destroy();
         }
         pipes.length = 0;
-        console.log("length" + pipes.length);
     }
 
     function getRandomHolePosition() {

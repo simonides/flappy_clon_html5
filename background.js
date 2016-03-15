@@ -20,6 +20,7 @@ function Background(_context){
         delete self.getSize;
     };
 
+var ss;
     function constructBackground() {
         backgroundContainer = new Container(context, $elem, {x: 0, y: 0});
         backgroundContainer.setVisible(true);
@@ -35,6 +36,7 @@ function Background(_context){
             backgroundSprites.push(sprite);
             var spriteSize = sprite.getSize();
             pos.x += spriteSize.x;
+            ss = spriteSize;
             if(pos.x >= 2 * width + spriteSize.x) { // make more if browser is resized
                 return spriteSize.y;
             }
@@ -77,7 +79,7 @@ function Background(_context){
 
     function moveSpritesLeft(spriteArray, width) {
         var requeueCount = 0;
-        var size = spriteArray[0].getSize();
+        var size = ss;//spriteArray[0].getSize();
 
         for(var i=0; i<spriteArray.length; ++i) {
             var newPos = spriteArray[i].translate({x: -width, y: 0});
